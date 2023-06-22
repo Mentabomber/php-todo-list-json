@@ -27,8 +27,17 @@ export default{
           this.newTask.name = "";
         })
         .catch(error => console.error("error", error));
+    },
+    onClick(index){
+      console.log(this.tasks[index]);
+      if (this.tasks[index].completed){
+        this.tasks[index].completed = false;
+      }
+      else{
+        this.tasks[index].completed = true;
+      }
+      
     }
-
   },
   mounted() {
     axios.get('http://localhost/quarto esercizio/php-todo-list-json/php/index.php')
@@ -44,8 +53,8 @@ export default{
   <div class="container">
     <div v-for="(task, index) in this.tasks"
     :key="index">
-      <span v-if="task.completed === true" class="task-completed">{{ task.name }}</span>
-      <span v-else >{{ task.name }}</span>
+      <span v-if="task.completed === true" class="task-completed" @click="onClick(index)">{{ task.name }}</span>
+      <span v-else @click="onClick(index)">{{ task.name }}</span>
     </div> 
   </div>
   <form @submit.prevent="onSubmit">
@@ -59,5 +68,8 @@ export default{
 <style scoped>
 .task-completed{
   text-decoration: line-through;
+}
+span{
+  cursor: pointer;
 }
 </style>
