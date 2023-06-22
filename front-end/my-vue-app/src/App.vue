@@ -6,14 +6,17 @@ export default{
   data(){
     return{
       tasks: [],
-      newTask: "",
+      newTask: {
+        name: "",
+        completed : false
+      },
     };
   },
   methods: {
     
     onSubmit() {
 
-      const url = "http://localhost/php/postTask.php";
+      const url = "http://localhost/quarto esercizio/php-todo-list-json/php/postTask.php";
       const data = this.newTask;
       const headers = {
         headers: {'Content-Type': 'multipart/form-data'}
@@ -21,14 +24,14 @@ export default{
       axios.post(url, data, headers)
         .then (response => {
           this.tasks = response.data;
-          this.newTask = "";
+          this.newTask.name = "";
         })
         .catch(error => console.error("error", error));
     }
 
   },
   mounted() {
-    axios.get('http://localhost/php/index.php') // http//localhost/index.php
+    axios.get('http://localhost/quarto esercizio/php-todo-list-json/php/index.php')
       .then(response => {
         this.tasks = response.data;
       });
@@ -39,13 +42,14 @@ export default{
 <template>
   <h1>To do List</h1>
   <div class="container">
-    <div v-for="task in this.tasks">
-      <span>{{ task }}</span>
+    <div v-for="(task, index) in this.tasks"
+    :key="index">
+      <span>{{ task.name }}</span>
     </div> 
   </div>
   <form @submit.prevent="onSubmit">
       <label for="task">task </label>
-      <input type="text" name="task" id="task" v-model="newTask">
+      <input type="text" name="task" id="task" v-model="newTask.name">
       <br />
       <input type="submit" value="CREATE NEW Task">
     </form>
