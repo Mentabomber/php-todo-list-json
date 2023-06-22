@@ -28,7 +28,7 @@ export default{
 
   },
   mounted() {
-    axios.get('php/index.php') // http//localhost/index.php
+    axios.get('http://localhost/php/index.php') // http//localhost/index.php
       .then(response => {
         this.tasks = response.data;
       });
