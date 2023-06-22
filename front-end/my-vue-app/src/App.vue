@@ -44,7 +44,8 @@ export default{
   <div class="container">
     <div v-for="(task, index) in this.tasks"
     :key="index">
-      <span>{{ task.name }}</span>
+      <span v-if="task.completed === true" class="task-completed">{{ task.name }}</span>
+      <span v-else >{{ task.name }}</span>
     </div> 
   </div>
   <form @submit.prevent="onSubmit">
@@ -56,5 +57,7 @@ export default{
 </template>
 
 <style scoped>
-
+.task-completed{
+  text-decoration: line-through;
+}
 </style>
