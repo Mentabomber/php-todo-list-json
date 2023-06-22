@@ -13,7 +13,7 @@ export default{
     
     onSubmit() {
 
-      const url = "http://localhost/php/tasks.php";
+      const url = "http://localhost/php/postTask.php";
       const data = this.newTask;
       const headers = {
         headers: {'Content-Type': 'multipart/form-data'}
@@ -28,7 +28,7 @@ export default{
 
   },
   mounted() {
-    axios.get('http//localhost/php/index.php')
+    axios.get('php/index.php') // http//localhost/index.php
       .then(response => {
         this.tasks = response.data;
       });
@@ -39,7 +39,7 @@ export default{
 <template>
   <h1>To do List</h1>
   <div class="container">
-    <div v-for="task in tasks">
+    <div v-for="task in this.tasks">
       <span>{{ task }}</span>
     </div> 
   </div>
