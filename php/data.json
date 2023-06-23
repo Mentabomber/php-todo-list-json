@@ -4,15 +4,10 @@
   { "name": "JS", "completed": true },
   { "name": "VUE", "completed": true },
   { "name": "PHP", "completed": true },
-  { "name": "", "completed": false },
   { "name": "ciao", "completed": false },
   { "name": "ciao", "completed": false },
   { "name": "ciao", "completed": false },
   { "name": "ciao", "completed": false },
-  { "name": "", "completed": false },
-  { "name": "", "completed": false },
-  { "name": "", "completed": false },
-  { "name": "", "completed": false },
-  { "name": "", "completed": false },
-  { "name": "", "completed": false }
+  { "name": "ciao", "completed": false },
+  { "name": "ciao", "completed": false }
 ]

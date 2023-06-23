@@ -25,6 +25,7 @@ export default{
         .then (response => {
           this.tasks = response.data;
           this.newTask.name = "";
+          this.newTask.completed = false;
         })
         .catch(error => console.error("error", error));
     },
@@ -36,6 +37,27 @@ export default{
       else{
         this.tasks[index].completed = true;
       }
+      
+    },
+    onClickDelete(index) {
+      console.log(index, "indice");
+      const url = "http://localhost/quarto esercizio/php-todo-list-json/php/deleteTask.php";
+      // const data = this.tasks.splice(index, 1); 
+      const data = {"index": index}
+      const headers = {
+        headers: {'Content-Type': 'multipart/form-data'}
+      };
+      axios.post(url, data, headers)
+        .then (response => {
+          // this.tasks = response.data;
+          const data = response.data;
+          this.tasks = data;
+          // console.log("data", data);
+          // this.newTask.name = "";
+          // this.newTask.completed = false;
+          // 
+        })
+        .catch(error => console.error("error", error));
       
     }
   },
@@ -53,8 +75,14 @@ export default{
   <div class="container">
     <div v-for="(task, index) in this.tasks"
     :key="index">
-      <span v-if="task.completed === true" class="task-completed" @click="onClick(index)">{{ task.name }}</span>
-      <span v-else @click="onClick(index)">{{ task.name }}</span>
+      <div class="flex" v-if="task.completed === true">
+        <span v-if="task.completed === true" class="task-completed" @click="onClick(index)">{{ task.name }}</span>
+        <div class="img-container"><img @click="onClickDelete(index)" src="trash-can-solid.svg" alt=""></div>
+      </div>
+      <div class="flex" v-else> 
+        <span @click="onClick(index)">{{ task.name }}</span> 
+        <div class="img-container"><img @click="onClickDelete(index)" src="trash-can-solid.svg" alt=""></div>
+      </div>
     </div> 
   </div>
   <form @submit.prevent="onSubmit">
@@ -71,5 +99,19 @@ export default{
 }
 span{
   cursor: pointer;
+}
+.img-container{
+  width: 25px;
+  height: 25px;
+}
+
+img{
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
 }
 </style>
