@@ -10,6 +10,7 @@ export default{
         name: "",
         completed : false
       },
+      updatedTask: "",
     };
   },
   methods: {
@@ -30,32 +31,50 @@ export default{
         .catch(error => console.error("error", error));
     },
     onClick(index){
-      console.log(this.tasks[index]);
-      if (this.tasks[index].completed){
-        this.tasks[index].completed = false;
-      }
-      else{
-        this.tasks[index].completed = true;
-      }
+      const url = "http://localhost/quarto esercizio/php-todo-list-json/php/taskCompleted.php";
+      // console.log(this.updatedTask);
+      console.log(index);
+      const headers = {
+        headers: {'Content-Type': 'multipart/form-data'}
+      };
+      axios.post(url, index, headers)
+        .then (response => {
+              this.tasks = response.data;
+            })
+          .catch(error => console.error("error", error));
+      // if (this.tasks[index].completed){
+        
+      //   this.tasks[index].completed = false;
+      //   this.updatedTask = this.tasks[index].completed;
+      //   axios.post(url, this.updatedTask, headers)
+      //     // .then (response => {
+      //     //   this.tasks = response.data;
+      //     // })
+      //     .catch(error => console.error("error", error));
+      // }
+      // else{
+      //   this.tasks[index].completed = true;
+      //   this.updatedTask = this.tasks[index].completed;
+      //   axios.post(url, this.updatedTask, headers)
+      //   .catch(error => console.error("error", error));
+      // }
+      // console.log(this.updatedTask);
       
     },
     onClickDelete(index) {
       console.log(index, "indice");
       const url = "http://localhost/quarto esercizio/php-todo-list-json/php/deleteTask.php";
-      // const data = this.tasks.splice(index, 1); 
+
       const data = {"index": index}
       const headers = {
         headers: {'Content-Type': 'multipart/form-data'}
       };
       axios.post(url, data, headers)
         .then (response => {
-          // this.tasks = response.data;
+
           const data = response.data;
           this.tasks = data;
-          // console.log("data", data);
-          // this.newTask.name = "";
-          // this.newTask.completed = false;
-          // 
+
         })
         .catch(error => console.error("error", error));
       

@@ -1,13 +1,10 @@
 [
-  { "name": "HTML", "completed": true },
-  { "name": "CSS", "completed": true },
-  { "name": "JS", "completed": true },
-  { "name": "VUE", "completed": true },
-  { "name": "PHP", "completed": true },
-  { "name": "ciao", "completed": false },
-  { "name": "ciao", "completed": false },
-  { "name": "ciao", "completed": false },
-  { "name": "ciao", "completed": false },
-  { "name": "ciao", "completed": false },
-  { "name": "ciao", "completed": false }
+  { "name": "HTML", "completed": "true" },
+  { "name": "CSS", "completed": "true" },
+  { "name": "JS", "completed": "true" },
+  { "name": "VUE", "completed": "true" },
+  { "name": "PHP", "completed": "true" },
+  { "name": "ciao", "completed": "false" },
+  { "name": "ciao", "completed": "false" },
+  { "name": "caio", "completed": "false" }
 ]

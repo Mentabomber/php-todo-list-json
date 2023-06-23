@@ -6,14 +6,22 @@ header('Content-Type: application/json');
 	
 $file = "data.json";
 
-$newTask = $_POST;
+$index = $_POST;
+// echo var_dump($newTask);
 // prova a cambiare il completed true/false qua da string a boolean 
 
 $dataStr = file_get_contents($file);
 $data = json_decode($dataStr);
 
-$data[] = $newTask;
-
+echo "<pre>";
+echo var_dump($index);
+echo "</pre>";
+if($data[$index]->completed === "true"){
+    $data[$index]->completed = "false";
+}
+else{
+    $data[$index]->completed = "true";
+}
 $encData = json_encode($data);
 
 file_put_contents($file, $encData);
