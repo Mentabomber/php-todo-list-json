@@ -40,6 +40,7 @@ export default{
       axios.post(url, index, headers)
         .then (response => {
               this.tasks = response.data;
+              console.log(response);
             })
           .catch(error => console.error("error", error));
       // if (this.tasks[index].completed){
