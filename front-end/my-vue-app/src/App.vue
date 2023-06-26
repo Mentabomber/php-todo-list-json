@@ -10,7 +10,6 @@ export default{
         name: "",
         completed : false
       },
-      updatedTask: "",
     };
   },
   methods: {
@@ -19,6 +18,7 @@ export default{
 
       const url = "http://localhost/quarto esercizio/php-todo-list-json/php/postTask.php";
       const data = this.newTask;
+      console.log(data);
       const headers = {
         headers: {'Content-Type': 'multipart/form-data'}
       };
@@ -27,6 +27,7 @@ export default{
           this.tasks = response.data;
           this.newTask.name = "";
           this.newTask.completed = false;
+          console.log(this.tasks);
         })
         .catch(error => console.error("error", error));
     },
@@ -34,13 +35,17 @@ export default{
       const url = "http://localhost/quarto esercizio/php-todo-list-json/php/taskCompleted.php";
       // console.log(this.updatedTask);
       console.log(index);
+      let data = {
+        "index": index
+      } 
       const headers = {
         headers: {'Content-Type': 'multipart/form-data'}
       };
-      axios.post(url, index, headers)
+      axios.post(url, data, headers)
         .then (response => {
-              this.tasks = response.data;
-              console.log(response);
+              const data = response.data;
+              this.tasks = data;
+              console.log(this.tasks);
             })
           .catch(error => console.error("error", error));
       // if (this.tasks[index].completed){
